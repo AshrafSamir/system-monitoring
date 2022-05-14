@@ -5,10 +5,12 @@
     "@uirouter/angularjs": "^1.0.30",
     "@vue/composition-api": "^1.4.4",
     "angular": "^1.8.2",
+    "axios": "^0.27.2",
     "echarts": "^5.2.2",
     "moment": "^2.29.1",
     "ngVue": "^1.7.8",
     "vue": "^2.6.14",
+    "vue-axios": "^3.4.1",
     "vue-echarts": "^6.0.1",
     "vuex": "^3.6.2"
   },

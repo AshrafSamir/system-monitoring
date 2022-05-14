@@ -1,22 +1,29 @@
 <template>
     <div> 
-        <input v-model="search" placeholder="Search">
-        <button @click="modifyURL" class="c-button">Clear</button>
+        <input  v-model="search" @input="handleSearchInput" placeholder="Search">
+        <button @click="handleClear" class="c-button">Clear</button>
     </div>
 </template>
 
 <script>
 export default {
-    name: "TableFilterComponent",
+    name: "v-table-filter",
     data() {
         return {
             search: ''
         }
     },
     methods: {
-        modifyURL(){
-            console.log(this.$router)
+        handleSearchInput() {
+            this.$emit('handle-search', this.search);
+        },
+        handleClear(){
+            this.search = ''
+            this.handleSearchInput()
         }
+        
+
+
     }
 }
 </script>

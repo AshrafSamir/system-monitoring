@@ -1,9 +1,9 @@
 <div class="c-dashboard">
-  <div class="c-filters__container">
-    <v-table-filter/>
+  <div ng-controller="homeController as ctrl" class="c-filters__container">
+    <v-table-filter v-props-input="ctrl.input" v-on-handle-search="ctrl.handleSearch"/> 
   </div>
 
-  <employees-list employees-list="homePageVm.employees"></employees-list>
+  <employees-list  employees-list="homePageVm.employees"></employees-list>
 
   <div class="c-dashboard__footer">
     <button class="c-button">

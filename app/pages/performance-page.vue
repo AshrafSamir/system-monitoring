@@ -1,7 +1,7 @@
 <template>
   <div class="c-dashboard">
     <div class="c-filters__container">
-      <table-filter-component />
+      [Search Component Goes Here]
     </div>
     <div class="c-dashboard__header">
       <performance-chart-component />
@@ -11,13 +11,14 @@
 
 <script>
 import PerformanceChartComponent from "../components/vue-components/performance-chart.vue";
-import TableFilterComponent from "../components/vue-components/table-filter.vue";
 
 export default {
   name: "AboutPageComponent",
+  mounted() {
+    this.$store.dispatch("fetchPerformance")
+  },
   components: {
     PerformanceChartComponent,
-    TableFilterComponent
   },
 };
 </script>

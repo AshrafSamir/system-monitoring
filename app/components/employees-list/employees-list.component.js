@@ -1,8 +1,8 @@
 angular
   .module('appModule')
   .filter('highlight', function ($sce) {
-    return function (text, searchText) {
-      if (searchText) text = text.replace(new RegExp('(' + searchText + ')', 'gi'), '<span class="highlighted">' + searchText + '</span>');
+    return function (text, scope) {
+      if (scope.input) text = text.replace(new RegExp('(' + scope.input + ')', 'gi'), '<span class="highlighted">' + scope.input + '</span>');
       return $sce.trustAsHtml(text);
     };
   }).component('employeesList', {
@@ -14,4 +14,8 @@ angular
     },
   });
 
-function EmployeesListComponent() {}
+function EmployeesListComponent($scope, $stateParams) {
+  if ($stateParams.filter) {
+    $scope.input = $stateParams.filter;
+  }
+}
