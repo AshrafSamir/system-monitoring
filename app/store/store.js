@@ -20,14 +20,15 @@ export default new Vuex.Store({
     fetchPerformance(state) {
       axios.get(url)
         .then((res) => {
-          // console.log(res.data);
           state.commit('setPerformance', res.data);
         });
     },
   },
   modules: {},
   getters: {
-    getPerformance: state => state.performance,
+    getPerformance: state => {
+      return state.performance;
+    },
 
   },
 });

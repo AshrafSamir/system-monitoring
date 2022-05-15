@@ -42,6 +42,7 @@
     "webpack-dev-server": "^4.7.3"
   },
   "scripts": {
+    "test": "jest",
     "start": "webpack-dev-server --open --progress"
   }
 }

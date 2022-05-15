@@ -28,7 +28,9 @@ use([
 
 export default {
   name: "PerformanceChartComponent",
-
+    props: {
+      newData: []
+    },
   components: {
     VChart,
   },
@@ -70,7 +72,7 @@ export default {
 
   computed: {
     chartData(){
-      return this.$store.getters.getPerformance;
+      return this.newData.length != 0 ? this.newData : this.$store.getters.getPerformance
     },
     initOptions() {
       return {
