@@ -64,7 +64,6 @@ export default {
             })
 
             return newChartData
-
         }
 
     },
@@ -80,4 +79,5 @@ export default {
     
     
 }
+
 </script>

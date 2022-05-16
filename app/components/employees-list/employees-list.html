@@ -7,6 +7,7 @@
     <div> Performance Index </div>
     <div> About </div>
   </div>
+  
   <div
     class="c-users-list__body"
     ng-repeat="employee in EmployeesListComponentVm.employeesList track by $index">
@@ -19,7 +20,7 @@
     <div> {{ employee.email }} </div>
     <div ng-bind-html="employee.profile.address | highlight:inputValue"></div>
     <div > {{ employee.start_date | date }} </div>
-    <div> {{ employee.performance_index }} </div>
+    <div class="c-users-list__Performance-index"> {{ employee.performance_index }} </div>
     <div ng-bind-html="employee.profile.about | highlight:inputValue"></div>
   </div>
 </div>
