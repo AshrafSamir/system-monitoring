@@ -2,12 +2,13 @@ angular
   .module('appModule')
   .controller('homeController', homePageController);
 
-function homePageController(Employees, $scope, $state) {
+function homePageController(Employees, $rootScope, $state) {
   const homePageVm = this;
   homePageVm.employees = [];
 
   this.handleSearch = function (search) {
     $state.go('app', { filter: search });
+    $rootScope.$broadcast('inputSearch', search);
   };
 
   activate();
