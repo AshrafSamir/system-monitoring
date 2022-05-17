@@ -28,47 +28,52 @@ use([
 
 export default {
   name: "PerformanceChartComponent",
-
+    props: {
+      newData: []
+    },
   components: {
     VChart,
   },
 
   data() {
     return {
-      chartData: [
-        {
-          date_ms: 1641772800000,
-          performance: 0.2,
-        },
-        {
-          date_ms: 1641859200000,
-          performance: 0.33,
-        },
-        {
-          date_ms: 1641945600000,
-          performance: 0.53,
-        },
-        {
-          date_ms: 1642032000000,
-          performance: 0.31,
-        },
-        {
-          date_ms: 1642118400000,
-          performance: 0.65,
-        },
-        {
-          date_ms: 1642204800000,
-          performance: 0.88,
-        },
-        {
-          date_ms: 1642291200000,
-          performance: 0.07,
-        },
-      ],
+       /*chartData: [
+         {
+           date_ms: 1641772800000,
+           performance: 0.2,
+         },
+         {
+           date_ms: 1641859200000,
+           performance: 0.33,
+         },
+         {
+           date_ms: 1641945600000,
+           performance: 0.53,
+         },
+         {
+           date_ms: 1642032000000,
+           performance: 0.31,
+         },
+         {
+           date_ms: 1642118400000,
+           performance: 0.65,
+         },
+         {
+           date_ms: 1642204800000,
+           performance: 0.88,
+         },
+         {
+           date_ms: 1642291200000,
+           performance: 0.07,
+         },
+       ], */
     };
   },
 
   computed: {
+    chartData(){
+      return this.newData.length != 0 ? this.newData : this.$store.getters.getPerformance
+    },
     initOptions() {
       return {
         width: "auto",
@@ -84,10 +89,11 @@ export default {
         },
         tooltip: {
           trigger: 'axis',
-          transitionDuration: 0,
-          confine: false,
-          hideDelay: 0,
-          padding: 0,
+          padding: 10,
+          backgroundColor: "#071330",
+          textStyle: {
+            color: "#fff",
+          },
         },
         grid: {
           left: "30px",
@@ -115,9 +121,50 @@ export default {
           axisTick: { show: true },
           splitLine: { show: true },
         },
+        visualMap: {
+          top: 50,
+          right: 10,
+          pieces: [
+            {
+              gt: 0,
+              lte: 50,
+              color: '#FD0100'
+            },
+            {
+              gt: 50,
+              lte: 80,
+              color: '#FBDB0F'
+            },
+            {
+              gt: 80,
+              lte: 100,
+              color: '#93CE07'
+            },
+          ],
+          outOfRange: {
+            color: '#999'
+          }
+      },
         series: [
           {
+            name:"Team Performance Index",
+            itemStyle: {
+              color: "#8ec6ad"
+             },
             data: this.yAxisData,
+            markLine: {
+                data: [
+                  {
+                    yAxis: 50
+                  },
+                  {
+                    yAxis: 80
+                  },
+                  {
+                    yAxis: 100
+                  },
+                ]
+            },
             type: "line",
             symbol: "circle",
             symbolSize: 2,
@@ -137,6 +184,9 @@ export default {
     yAxisData() {
       return this.chartData.map((item) => +item.performance * 100);
     },
+    mySeriesStyles(){
+
+    }
   },
 
   methods: {

@@ -8,10 +8,13 @@
     display: table-row;
     font-size: 16px;
     font-weight: 500;
-    background-color: #e5e9f1;
+    background-color: #0099ff;
 
     > div {
       display: table-cell;
+      white-space: nowrap;
+      padding: 15px;
+      color: #fff;
       text-align: center;
       vertical-align: middle;
       font-size: 14px;
@@ -40,4 +43,12 @@
     display: flex;
     align-items: center;
   }
+
+  .c-users-list__Performance-index{
+    text-align: center;
+  }
+}
+.highlighted {
+  background-color: rgb(62, 90, 10);
+  color: rgb(255, 255, 255);
 }
