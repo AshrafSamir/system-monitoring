@@ -10,6 +10,7 @@
 
 <script>
 import moment from "moment";
+import chartDataFromInput from '../../helpers/date-filter'
 
 export default {
     name: "DateFilterComponent",
@@ -19,8 +20,8 @@ export default {
     },
     data() {
         return {
-            startDate: '',
-            endDate: '',
+            startDate: null,
+            endDate: null,
         }
     },
     computed: {
@@ -41,29 +42,6 @@ export default {
 
             return this.formatDate(Math.max(...dates));
             
-        },
-        chartDataFromInput(){
-
-            // take start date and end date convert it to milliseconds
-            
-            let startDate = new Date(this.startDate); 
-            let endDate = new Date(this.endDate); 
-            let startMilliseconds = startDate.getTime();
-            let endMilliseconds = endDate.getTime();
-
-            // validation condition
-            if(endMilliseconds < startMilliseconds){
-                this.startDate = this.minDate
-                this.endDate = this.maxDate
-                alert("Start date should be bigger than end date")
-            }
-
-            //  then filter and return new data
-            const newChartData =  this.chartData.filter(item => {
-               return  (item.date_ms >= startMilliseconds) && (item.date_ms <= endMilliseconds)
-            })
-
-            return newChartData
         }
 
     },
@@ -72,7 +50,26 @@ export default {
             return moment(dateInMs).format("YYYY-MM-DD");
         },
         handleInput(event){
-            this.$emit('response', this.chartDataFromInput)
+
+
+            // Make the inputs date to milliseconds
+            let startMilliseconds = new Date(this.startDate).getTime();
+            let endMilliseconds = new Date(this.endDate).getTime();
+
+            // validation condition
+            if (endMilliseconds < startMilliseconds) {
+                
+                if (this.startDate && this.endDate) {
+
+                    this.startDate = this.minDate;
+                    this.endDate = this.maxDate;
+                    alert('Start date should be bigger than end date');
+                }
+            }
+
+            // Emit the new chart data
+            this.$emit('response', chartDataFromInput(this.startDate, this.endDate, this.chartData))
+
         },
         
     }
