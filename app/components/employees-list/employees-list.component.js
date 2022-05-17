@@ -1,10 +1,8 @@
-// import Vue from 'vue';
 angular
   .module('appModule')
   .filter('highlight', function ($sce) {
-    return function (text, scope) {
-      // Vue.set(scope, 'var', scope.input);
-      if (scope.input) text = text.replace(new RegExp('(' + scope.input + ')', 'gi'), '<span class="highlighted">' + scope.input + '</span>');
+    return function (text, input) {
+      if (input) text = text.replace(new RegExp('(' + input + ')', 'gi'), '<span class="highlighted">' + input + '</span>');
       return $sce.trustAsHtml(text);
     };
   }).component('employeesList', {
@@ -17,7 +15,10 @@ angular
   });
 
 function EmployeesListComponent($scope, $stateParams) {
+  $scope.$root.$on('inputSearch', function (event, search) {
+    $scope.inputValue = search;
+  });
   if ($stateParams.filter) {
-    $scope.input = $stateParams.filter;
+    $scope.inputValue = $stateParams.filter;
   }
 }

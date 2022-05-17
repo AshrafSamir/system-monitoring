@@ -89,10 +89,11 @@ export default {
         },
         tooltip: {
           trigger: 'axis',
-          transitionDuration: 0,
-          confine: false,
-          hideDelay: 0,
-          padding: 0,
+          padding: 10,
+          backgroundColor: "#071330",
+          textStyle: {
+            color: "#fff",
+          },
         },
         grid: {
           left: "30px",
@@ -120,9 +121,50 @@ export default {
           axisTick: { show: true },
           splitLine: { show: true },
         },
+        visualMap: {
+          top: 50,
+          right: 10,
+          pieces: [
+            {
+              gt: 0,
+              lte: 50,
+              color: '#FD0100'
+            },
+            {
+              gt: 50,
+              lte: 80,
+              color: '#FBDB0F'
+            },
+            {
+              gt: 80,
+              lte: 100,
+              color: '#93CE07'
+            },
+          ],
+          outOfRange: {
+            color: '#999'
+          }
+      },
         series: [
           {
+            name:"Team Performance Index",
+            itemStyle: {
+              color: "#8ec6ad"
+             },
             data: this.yAxisData,
+            markLine: {
+                data: [
+                  {
+                    yAxis: 50
+                  },
+                  {
+                    yAxis: 80
+                  },
+                  {
+                    yAxis: 100
+                  },
+                ]
+            },
             type: "line",
             symbol: "circle",
             symbolSize: 2,
@@ -142,6 +184,9 @@ export default {
     yAxisData() {
       return this.chartData.map((item) => +item.performance * 100);
     },
+    mySeriesStyles(){
+
+    }
   },
 
   methods: {

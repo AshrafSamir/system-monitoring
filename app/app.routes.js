@@ -9,6 +9,11 @@ angular.module('appModule')
       .state({
         name: 'app',
         url: '/?filter',
+        params: {
+          filter: {
+            dynamic: true,
+          },
+        },
         templateUrl: './pages/home-page/home-page.html',
         controller: 'homeController',
         controllerAs: 'homePageVm',
