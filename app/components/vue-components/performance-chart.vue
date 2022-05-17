@@ -35,7 +35,7 @@ export default {
 
   data() {
     return {
-       /*chartData: [
+       chartData: [
          {
            date_ms: 1641772800000,
            performance: 0.2,
@@ -64,7 +64,7 @@ export default {
            date_ms: 1642291200000,
            performance: 0.07,
          },
-       ], */
+       ], 
     };
   },
 
